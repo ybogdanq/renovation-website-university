@@ -14,8 +14,8 @@ export const Header: FC<Props> = ({ className, ...props }) => {
 
   return (
     <header
-      className={cn(className, "w-full absolute top-0", {
-        "bg-neutral-700": pathname == "/",
+      className={cn(className, "w-full z-20 absolute top-0", {
+        "bg-neutral-700": pathname !== "/",
       })}
       {...props}
     >
@@ -34,7 +34,7 @@ export const Header: FC<Props> = ({ className, ...props }) => {
             type="text"
             className="placeholder:text-white outline-none pb-1 text-white bg-transparent text-sm leading-6"
           />
-          <button>
+          <button className="scale-[80%]">
             <Search />
           </button>
         </div>
