@@ -20,6 +20,27 @@
     background-color: rgba(255, 255, 255, 0.1);
   }
 
+  p[class^="defaultText"] {
+    font-weight: theme(fontWeight.extralight);
+    font-style: italic;
+    color: theme(textColor.black);
+  }
+
+  *[class^="defaultHeading"] {
+    font-weight: theme(fontWeight.light);
+    font-style: italic;
+    color: theme(textColor.black);
+  }
+
+  *[class^="styledImage"] {
+    cursor: pointer;
+    transition: theme(transitionProperty.all) theme(transitionDuration.300) theme(transitionTimingFunction.linear);
+  }
+  *:hover > *[class^="styledImage"] {
+    transform: translate(-15px, -15px);
+    box-shadow: 15px 15px 4px 0px rgba(0, 0, 0, 0.4);
+  }
+
   @media screen and (max-width: 768px) {
     .defaultBtn {
       font-size:theme(fontSize.xs);

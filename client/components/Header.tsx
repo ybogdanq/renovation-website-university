@@ -10,8 +10,6 @@ interface Props
 export const Header: FC<Props> = ({ className, ...props }) => {
   const pathname = usePathname();
 
-  console.log(pathname);
-
   return (
     <header
       className={cn(className, "w-full z-20 absolute top-0", {
