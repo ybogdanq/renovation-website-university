@@ -33,7 +33,7 @@ export const Header: FC<Props> = ({ className, ...props }) => {
         )}
         <nav
           className={cn(
-            "transition-all px-10 md:px-0 fixed md:relative top-0 bottom-0 left-0 min-h-screen md:min-h-fit flex align-middle justify-center md:justify-start bg-white md:bg-transparent text-black flex-col md:flex-row md:text-white text-large",
+            "transition-all opacity-100 px-10 md:px-0 fixed md:relative top-0 bottom-0 left-0 min-h-screen md:min-h-fit flex align-middle justify-center md:justify-start bg-white md:bg-transparent text-black flex-col md:flex-row md:text-white text-large",
             windowWidth < 768
               ? isBurgerActive
                 ? "translate-x-0"
