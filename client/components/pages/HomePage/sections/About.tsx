@@ -1,7 +1,9 @@
-import React, { DetailedHTMLProps, FC, HTMLAttributes } from "react";
+"use client";
+import React, { DetailedHTMLProps, FC, HTMLAttributes, useRef } from "react";
 import cn from "classnames";
 import Image from "next/image";
 import AboutImage from "../assets/about.jpg";
+import { InView } from "react-intersection-observer";
 
 interface Props
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
@@ -11,14 +13,26 @@ export const About: FC<Props> = ({ className, ...props }) => {
     <div className={cn(className)} {...props}>
       <div className="container py-8 min-h-[300px] sm:min-h-screen grid grid-cols-1 md:grid-cols-2 items-center gap-y-12 gap-x-6">
         <div className="hidden sm:flex items-center justify-center">
-          <span className="sm:block relative sm:max-w-[60%] sm:pt-[80%] md:max-w-[80%] w-full h-0 md:pt-[100%]">
-            <Image
-              src={AboutImage.src}
-              className="styledImage absolute top-0 left-0 right-0 bottom-0 object-cover"
-              fill
-              alt="about image"
-            />
-          </span>
+          <InView triggerOnce>
+            {({ inView, ref }) => (
+              <span
+                ref={ref}
+                className="sm:block relative sm:max-w-[60%] sm:pt-[80%] md:max-w-[80%] w-full h-0 md:pt-[100%]"
+              >
+                <Image
+                  src={AboutImage.src}
+                  className={cn(
+                    "styledImage absolute top-0 left-0 right-0 bottom-0 object-cover",
+                    {
+                      "styledImage-inView": inView,
+                    }
+                  )}
+                  fill
+                  alt="about image"
+                />
+              </span>
+            )}
+          </InView>
         </div>
         <div>
           <h1 className="defaultHeading text-2xl md:text-3xl lg:text-4xl text-center mb-2 sm:mb-3 md:mb-5 tracking-wide">
