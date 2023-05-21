@@ -8,7 +8,7 @@ interface Props
 
 export const OurWork: FC<Props> = ({ className, ...props }) => {
   return (
-    <div className={cn(className, "relative py-28")} {...props}>
+    <div className={cn(className, "relative py-14 md:py-28")} {...props}>
       <Image
         src={OurWorkBg.src}
         fill
@@ -16,10 +16,10 @@ export const OurWork: FC<Props> = ({ className, ...props }) => {
         alt="our work bg"
       />
       <div className="relative z-10 container flex flex-col items-center justify-center">
-        <h1 className="defaultHeading text-white uppercase tracking-wide text-2xl md:text-3xl lg:text-4xl mb-10">
+        <h1 className="defaultHeading text-white uppercase tracking-wide text-2xl md:text-3xl lg:text-4xl mb-7 md:mb-10">
           Our work
         </h1>
-        <div className="flex items-center justify-center flex-wrap max-w-2xl gap-x-4 gap-y-6">
+        <div className="flex justify-center items-centerf flex-wrap flex-grow-0 flex-shrink-0 whitespace-nowrap md:whitespace-normal gap-x-2 md:gap-x-4 gap-y-3 md:gap-y-6 max-w-xl [&>*]:basis-[130px] [&>*]:px-2 [&>*]:md:px-8 [&>*]:md:basis-auto ">
           <button className="defaultBtn">Living Room</button>
           <button className="defaultBtn">Bedroom</button>
           <button className="defaultBtn">Kitchen</button>
