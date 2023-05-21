@@ -34,11 +34,11 @@
 
   *[class^="styledImage"] {
     cursor: pointer;
-    transition: theme(transitionProperty.all) theme(transitionDuration.300) theme(transitionTimingFunction.linear);
+    transition: theme(transitionProperty.all) theme(transitionDuration.300) theme(transitionTimingFunction.linear) theme(transitionDelay.500);
   }
-  *:hover > *[class^="styledImage"] {
-    transform: translate(-15px, -15px);
-    box-shadow: 15px 15px 4px 0px rgba(0, 0, 0, 0.4);
+  .styledImage-inView {
+    transform: translate(-10px, -10px);
+    box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.4);
   }
 
   @media screen and (max-width: 768px) {
