@@ -16,12 +16,12 @@ export const Inspiration: FC<Props> = ({ className, ...props }) => {
   const windowWidth = useWindowWidth();
   return (
     <div className={cn(className)} {...props}>
-      <div className="container py-8">
+      <div className="container py-24">
         <h1 className="defaultHeading text-center text-2xl md:text-3xl lg:text-4xl tracking-wide mb-10">
           Inspiration
         </h1>
         <Swiper
-          className="max-w-4xl cursor-grab"
+          className="max-w-5xl cursor-grab"
           spaceBetween={0}
           slidesPerView={windowWidth > 768 ? 2 : 1}
           onSlideChange={() => console.log("slide change")}
