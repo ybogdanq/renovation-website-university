@@ -9,15 +9,17 @@ import cn from "classnames";
 
 interface Props
   extends DetailedHTMLProps<
-    HTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
+    HTMLAttributes<HTMLTextAreaElement>,
+    HTMLTextAreaElement
   > {
+  resize: boolean;
   label: string;
   value?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => any;
+  onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => any;
 }
 
-export const Input: FC<Props> = ({
+export const Textarea: FC<Props> = ({
+  resize,
   label,
   onChange,
   value,
@@ -31,7 +33,7 @@ export const Input: FC<Props> = ({
         className={cn(
           "italic font-extralight absolute leading-3 pointer-events-none bg-white px-1 transition-all",
           {
-            "top-[50%] translate-y-[-50%] left-4 text-[inherit]/[inherit]":
+            "top-[22px] translate-y-[-50%] left-4 text-[inherit]/[inherit]":
               !isFocused && !value,
             "top-0 translate-y-[-50%] left-2 text-[14px]/[14px]":
               isFocused || value,
@@ -40,12 +42,16 @@ export const Input: FC<Props> = ({
       >
         {label}
       </label>
-      <input
-        className="focus:outline-none border-[1px] border-black py-2 px-4 italic font-light w-full"
+      <textarea
+        className={cn(
+          "focus:outline-none border-[1px] border-black py-2 px-4 italic font-light w-full min-h-[135px]",
+          {
+            "resize-none": !resize,
+          }
+        )}
         placeholder=""
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        type="text"
         value={value}
         onChange={onChange}
         {...props}
