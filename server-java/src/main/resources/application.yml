@@ -5,12 +5,12 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/
-    username:
-    password: vfrcbv
+    url: jdbc:postgresql://localhost:5432/renovationdb
+    username: postgres
+    password: root
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
