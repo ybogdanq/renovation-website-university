@@ -9,15 +9,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("./prisma/prisma.service");
-const renovation_service_1 = require("./renovation/renovation.service");
-const renovation_controller_1 = require("./renovation/renovation.controller");
+const email_service_1 = require("./email/email.service");
+const email_controller_1 = require("./email/email.controller");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [],
-        controllers: [renovation_controller_1.RenovationController],
-        providers: [prisma_service_1.PrismaService, renovation_service_1.RenovationService],
+        controllers: [email_controller_1.EmailController],
+        providers: [prisma_service_1.PrismaService, email_service_1.EmailService],
     })
 ], AppModule);
 exports.AppModule = AppModule;

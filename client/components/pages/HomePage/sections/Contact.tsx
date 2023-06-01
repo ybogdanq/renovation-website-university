@@ -2,12 +2,17 @@
 import React, { DetailedHTMLProps, FC, HTMLAttributes, useState } from "react";
 import cn from "classnames";
 import { Button, Input, Textarea } from "@ui";
+import EmailService from "@/services/EmailService";
 
 interface Props
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
 export const Contact: FC<Props> = ({ className, ...props }) => {
-  const [value, setValue] = useState("");
+  const [firstName, setFirstName] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [additionalInfo, setAdditionalInfo] = useState<string>("");
   return (
     <div className={cn(className, "py-24")} {...props}>
       <div className="container">
@@ -21,47 +26,59 @@ export const Contact: FC<Props> = ({ className, ...props }) => {
         <div className="max-w-4xl mx-auto py-10 flex flex-wrap justify-between gap-y-6 gap-x-12">
           <Input
             className="max-w-[calc(50%-1.5rem)] w-full"
-            label="test"
+            label="First name"
             onChange={(e) => {
-              setValue(e.target.value);
+              setFirstName(e.target.value);
             }}
-            value={value}
+            value={firstName}
           />
           <Input
             className="max-w-[calc(50%-1.5rem)] w-full"
-            label="test"
+            label="Last name"
             onChange={(e) => {
-              setValue(e.target.value);
+              setLastName(e.target.value);
             }}
-            value={value}
+            value={lastName}
           />
           <Input
             className="max-w-[calc(50%-1.5rem)] w-full"
-            label="test"
+            label="Phone"
             onChange={(e) => {
-              setValue(e.target.value);
+              setPhone(e.target.value);
             }}
-            value={value}
+            value={phone}
           />
           <Input
             className="max-w-[calc(50%-1.5rem)] w-full"
-            label="test"
+            label="Email"
             onChange={(e) => {
-              setValue(e.target.value);
+              setEmail(e.target.value);
             }}
-            value={value}
+            value={email}
           />
           <Textarea
             resize={false}
             className="w-full"
-            label="test"
+            label="Additional info"
             onChange={(e) => {
-              setValue(e.target.value);
+              setAdditionalInfo(e.target.value);
             }}
-            value={value}
+            value={additionalInfo}
           />
           <div className="w-full flex items-center justify-center">
-            <Button>Send</Button>
+            <Button
+              onClick={() =>
+                EmailService.sendContactRequest({
+                  email: email,
+                  firstName: firstName,
+                  lastName: lastName,
+                  phone: phone,
+                  additionalInfo: additionalInfo,
+                })
+              }
+            >
+              Send
+            </Button>
           </div>
         </div>
       </div>

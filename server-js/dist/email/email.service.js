@@ -9,21 +9,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RenovationService = void 0;
+exports.EmailService = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../prisma/prisma.service");
-let RenovationService = class RenovationService {
-    constructor(prismaService) {
-        this.prismaService = prismaService;
+const nodemailer_1 = require("nodemailer");
+const { GMAIL_PASS_KEY } = process.env;
+let EmailService = class EmailService {
+    constructor() {
+        this.transporter = (0, nodemailer_1.createTransport)({
+            host: 'authsmtp.securemail.pro',
+            port: 465,
+            secure: true,
+            auth: {
+                user: 'drivenation0@gmail.com',
+                pass: GMAIL_PASS_KEY,
+            },
+        });
     }
-    async getAll() {
-        await this.prismaService.renovation.deleteMany();
-        return this.prismaService.renovation.findMany({});
+    async sendContactRequest(data) {
+        console.log(data);
+        this.transporter.sendMail({
+            from: 'Renovation app',
+            to: data.email,
+            subject: 'Test',
+            html: 'Test',
+        });
     }
 };
-RenovationService = __decorate([
+EmailService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
-], RenovationService);
-exports.RenovationService = RenovationService;
-//# sourceMappingURL=renovation.service.js.map
+    __metadata("design:paramtypes", [])
+], EmailService);
+exports.EmailService = EmailService;
+//# sourceMappingURL=email.service.js.map

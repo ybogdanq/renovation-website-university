@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  env: {
+    APP_URL: process.env.APP_URL,
+    API_URL: process.env.API_URL,
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
