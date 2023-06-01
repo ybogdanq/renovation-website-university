@@ -9,7 +9,7 @@ interface Props
   productTitle: string;
 }
 
-export const Product: FC<Props> = ({
+export const ProductImage: FC<Props> = ({
   image,
   productTitle,
   className,

@@ -4,7 +4,7 @@ import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
-import { Product } from "../../blocks/Product";
+import { ProductImage } from "../../blocks/ProductImage";
 import KitchenImg from "../assets/kitchen.png";
 import LivingRoomImg from "../assets/livingRoom.png";
 import useWindowWidth from "@/utils/hooks/useWindowWidth";
@@ -28,16 +28,16 @@ export const Inspiration: FC<Props> = ({ className, ...props }) => {
           onSwiper={(swiper) => console.log(swiper)}
         >
           <SwiperSlide className="px-10">
-            <Product image={LivingRoomImg} productTitle="Living room" />
+            <ProductImage image={LivingRoomImg} productTitle="Living room" />
           </SwiperSlide>
           <SwiperSlide className="px-10">
-            <Product image={KitchenImg} productTitle="Kitchen" />
+            <ProductImage image={KitchenImg} productTitle="Kitchen" />
           </SwiperSlide>
           <SwiperSlide className="px-10">
-            <Product image={LivingRoomImg} productTitle="Living room" />
+            <ProductImage image={LivingRoomImg} productTitle="Living room" />
           </SwiperSlide>
           <SwiperSlide className="px-10">
-            <Product image={KitchenImg} productTitle="Kitchen" />
+            <ProductImage image={KitchenImg} productTitle="Kitchen" />
           </SwiperSlide>
         </Swiper>
       </div>
