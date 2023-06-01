@@ -8,6 +8,10 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     const prismaService = app.get(prisma_service_1.PrismaService);
     await prismaService.enableShutdownHooks(app);
+    app.enableCors({
+        origin: process.env.CLIENT_APP,
+        credentials: true,
+    });
     await app.listen(PORT);
     console.log('App runs on PORT: ' + PORT);
 }
