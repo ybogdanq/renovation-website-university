@@ -16,6 +16,7 @@ public class Renovation {
     private String description;
     private Integer price;
     private String characteristicsIds;
+    private String imgsrc;
     @Transient
     private ArrayList<Characteristics> characteristics;
     @Transient
@@ -26,12 +27,13 @@ public class Renovation {
     public Renovation() {
     }
 
-    public Renovation(String id, String name, String description, Integer price, String characteristicsIds) {
+    public Renovation(String id, String name, String description, Integer price, String characteristicsIds, String imgsrc) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.characteristicsIds = characteristicsIds;
+        this.imgsrc = imgsrc;
     }
 
     public String getCharacteristicsIds() {
@@ -42,6 +44,13 @@ public class Renovation {
         this.characteristicsIds = characteristicsIds;
     }
 
+    public String getImgsrc() {
+        return imgsrc;
+    }
+
+    public void setImgsrc(String imgsrc) {
+        this.imgsrc = imgsrc;
+    }
     public void setId(String id) {
         this.id = id;
     }
