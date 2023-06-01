@@ -2,6 +2,7 @@
 import React, { DetailedHTMLProps, FC, HTMLAttributes, useState } from "react";
 import cn from "classnames";
 import { Button, Input, Textarea } from "@ui";
+import EmailService from "@/services/EmailService";
 
 interface Props
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
@@ -65,7 +66,19 @@ export const Contact: FC<Props> = ({ className, ...props }) => {
             value={additionalInfo}
           />
           <div className="w-full flex items-center justify-center">
-            <Button>Send</Button>
+            <Button
+              onClick={() =>
+                EmailService.sendContactRequest({
+                  email: email,
+                  firstName: firstName,
+                  lastName: lastName,
+                  phone: phone,
+                  additionalInfo: additionalInfo,
+                })
+              }
+            >
+              Send
+            </Button>
           </div>
         </div>
       </div>
