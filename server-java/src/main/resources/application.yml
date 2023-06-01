@@ -1,13 +1,13 @@
 server:
-  port: 8080
+  port: 5432
 
 
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/renovationdb
-    username: postgres
-    password: root
+    url: jdbc:postgresql://localhost:5432/renovation_db
+    username: ybogdanq
+    password:
   jpa:
     hibernate:
       ddl-auto: update
