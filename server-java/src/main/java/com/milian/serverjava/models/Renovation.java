@@ -23,6 +23,8 @@ public class Renovation {
     private ArrayList<Comment> comments;
     @Transient
     private ArrayList<Rating> ratings;
+    @Transient
+    private ArrayList<String> images;
 
     public Renovation() {
     }
@@ -34,6 +36,14 @@ public class Renovation {
         this.price = price;
         this.characteristicsIds = characteristicsIds;
         this.imgsrc = imgsrc;
+    }
+
+    public ArrayList<String> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<String> images) {
+        this.images = images;
     }
 
     public String getCharacteristicsIds() {
