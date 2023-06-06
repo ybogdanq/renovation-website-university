@@ -1,5 +1,5 @@
-import { RenovationPage } from "@/components/pages/RenovationPage";
+import { RenovationPage } from '@/components/pages/RenovationPage'
 
 export default function RenovationItem() {
-  return <RenovationPage />;
+	return <RenovationPage />
 }

@@ -1,7 +1,7 @@
 export interface IContactRequestData {
-  firstName: string;
-  phone: string;
-  lastName: string;
-  email: string;
-  additionalInfo: string;
+	firstName: string
+	phone: string
+	lastName: string
+	email: string
+	additionalInfo: string
 }
