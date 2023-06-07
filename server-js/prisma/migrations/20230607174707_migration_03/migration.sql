@@ -4,6 +4,7 @@ CREATE TABLE "Renovation" (
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "price" INTEGER NOT NULL,
+    "imgsrc" TEXT NOT NULL,
 
     CONSTRAINT "Renovation_pkey" PRIMARY KEY ("id")
 );
@@ -20,6 +21,7 @@ CREATE TABLE "Characteristic" (
 CREATE TABLE "Comment" (
     "id" TEXT NOT NULL,
     "renovationId" TEXT NOT NULL,
+    "message" TEXT NOT NULL,
 
     CONSTRAINT "Comment_pkey" PRIMARY KEY ("id")
 );
@@ -28,6 +30,7 @@ CREATE TABLE "Comment" (
 CREATE TABLE "Rating" (
     "id" TEXT NOT NULL,
     "renovationId" TEXT NOT NULL,
+    "rating" INTEGER NOT NULL,
 
     CONSTRAINT "Rating_pkey" PRIMARY KEY ("id")
 );

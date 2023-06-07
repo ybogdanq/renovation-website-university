@@ -10,31 +10,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Renovation {
-  id              String           @id @default(uuid())
+model renovation {
+  id              Int              @id @default(autoincrement())
   name            String
   description     String
   price           Int
-  characteristics Characteristic[]
-  comments        Comment[]
-  ratings         Rating[]
+  characteristics characteristic[]
+  comment         comment[]
+  rating          rating[]
+  imgsrc          String
 }
 
-model Characteristic {
-  id          String       @id @default(uuid())
-  name        String
-  renovations Renovation[]
+model characteristic {
+  id           Int         @id @default(autoincrement())
+  name         String
+  renovation   renovation? @relation(fields: [renovationId], references: [id])
+  renovationId Int?
 }
 
-model Comment {
-  id           String     @id @default(uuid())
-  renovation   Renovation @relation(fields: [renovationId], references: [id])
-  renovationId String
+model comment {
+  id           Int        @id @default(autoincrement())
+  renovationId Int
+  message      String
+  renovation   renovation @relation(fields: [renovationId], references: [id])
 }
 
-model Rating {
-  id           String     @id @default(uuid())
-  ratingCount  Int
-  renovation   Renovation @relation(fields: [renovationId], references: [id])
-  renovationId String
+model rating {
+  id           Int        @id @default(autoincrement())
+  renovationId Int
+  rating       Int
+  renovation   renovation @relation(fields: [renovationId], references: [id])
 }
