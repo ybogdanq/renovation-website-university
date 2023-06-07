@@ -1,4 +1,11 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpException,
+  HttpStatus,
+  Next,
+  Post,
+} from '@nestjs/common';
 import { EmailService } from './email.service';
 import { IContactRequestData } from 'src/types/Email';
 
@@ -10,11 +17,11 @@ export class EmailController {
   async sendContactRequest(@Body() body) {
     try {
       const data: IContactRequestData = body.data;
-      this.emailService.sendContactRequest(data);
+      await this.emailService.sendContactRequest(data);
 
       return 'sent';
     } catch (error) {
-      return error;
+      throw new HttpException('Forbidden', HttpStatus.EXPECTATION_FAILED);
     }
   }
 }
