@@ -1,8 +1,6 @@
 server:
   port: 2345
 
-
-
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/renovation_db
@@ -18,4 +16,3 @@ spring:
     show-sql: true
   main:
     web-application-type: servlet
-
