@@ -22,11 +22,11 @@ let EmailController = class EmailController {
     async sendContactRequest(body) {
         try {
             const data = body.data;
-            this.emailService.sendContactRequest(data);
+            await this.emailService.sendContactRequest(data);
             return 'sent';
         }
         catch (error) {
-            return error;
+            throw new common_1.HttpException('Forbidden', common_1.HttpStatus.EXPECTATION_FAILED);
         }
     }
 };

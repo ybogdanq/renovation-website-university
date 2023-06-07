@@ -12,22 +12,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmailService = void 0;
 const common_1 = require("@nestjs/common");
 const nodemailer_1 = require("nodemailer");
-const { GMAIL_PASS_KEY } = process.env;
+const { GMAIL_PASS_KEY, GMAIL_USER } = process.env;
+console.log(GMAIL_PASS_KEY, GMAIL_USER);
 let EmailService = class EmailService {
     constructor() {
         this.transporter = (0, nodemailer_1.createTransport)({
-            host: 'authsmtp.securemail.pro',
+            host: 'smtp.gmail.com',
             port: 465,
             secure: true,
             auth: {
-                user: 'drivenation0@gmail.com',
+                user: GMAIL_USER,
                 pass: GMAIL_PASS_KEY,
             },
         });
     }
     async sendContactRequest(data) {
-        console.log(data);
-        this.transporter.sendMail({
+        await this.transporter.sendMail({
             from: 'Renovation app',
             to: data.email,
             subject: 'Test',
