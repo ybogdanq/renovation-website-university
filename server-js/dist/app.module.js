@@ -12,13 +12,15 @@ const prisma_service_1 = require("./prisma/prisma.service");
 const email_service_1 = require("./email/email.service");
 const email_controller_1 = require("./email/email.controller");
 const data_mock_controller_1 = require("./data-mock/data-mock.controller");
+const renovation_controller_1 = require("./renovation/renovation.controller");
+const renovation_service_1 = require("./renovation/renovation.service");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [],
-        controllers: [email_controller_1.EmailController, data_mock_controller_1.DataMockController],
-        providers: [prisma_service_1.PrismaService, email_service_1.EmailService],
+        controllers: [email_controller_1.EmailController, data_mock_controller_1.DataMockController, renovation_controller_1.RenovationController],
+        providers: [prisma_service_1.PrismaService, email_service_1.EmailService, renovation_service_1.RenovationService],
     })
 ], AppModule);
 exports.AppModule = AppModule;
