@@ -14,7 +14,7 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDi
 export const Inspiration: FC<Props> = ({ className, ...props }) => {
 	const windowWidth = useWindowWidth()
 	return (
-		<div className={cn(className)} {...props}>
+		<div id='#inspiration' className={cn(className)} {...props}>
 			<div className="container py-24">
 				<h1 className="defaultHeading text-center text-2xl md:text-3xl lg:text-4xl tracking-wide mb-10">
 					Inspiration

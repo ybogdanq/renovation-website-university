@@ -46,10 +46,18 @@ export const Header: FC<Props> = ({ className, ...props }) => {
 						</div>
 					)}
 					<ul className="flex flex-col md:flex-row align-middle md:[&>*]:mr-3 [&>*]:cursor-pointer [&>*]:duration-200 [&>*:hover]:text-slate-200 [&>*:hover]:underline [&>*]:leading-8">
-						<li>Home</li>
-						<li>Inspiration</li>
-						<li>About</li>
-						<li>Our work</li>
+						<li>
+							<a href="/">Home</a>
+						</li>
+						<li>
+							<a href="/#inspiration">Inspiration</a>
+						</li>
+						<li>
+							<a href="/#about">About</a>
+						</li>
+						<li>
+							<a href="/#contact">Contact</a>
+						</li>
 					</ul>
 				</nav>
 				<div className="border-b-2 border-white flex align-middle">

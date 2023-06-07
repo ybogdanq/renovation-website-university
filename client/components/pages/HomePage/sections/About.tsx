@@ -9,7 +9,7 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDi
 
 export const About: FC<Props> = ({ className, ...props }) => {
 	return (
-		<div className={cn(className)} {...props}>
+		<div id='/#about' className={cn(className)} {...props}>
 			<div className="container sm:pt-10 sm:pb-8 py-8 min-h-[300px] sm:min-h-screen grid grid-cols-1 md:grid-cols-2 items-center gap-y-12 gap-x-6">
 				<div className="hidden sm:flex items-center justify-center">
 					<InView triggerOnce>

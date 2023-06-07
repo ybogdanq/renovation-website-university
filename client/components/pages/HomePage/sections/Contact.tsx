@@ -13,7 +13,7 @@ export const Contact: FC<Props> = ({ className, ...props }) => {
 	const [email, setEmail] = useState<string>('')
 	const [additionalInfo, setAdditionalInfo] = useState<string>('')
 	return (
-		<div className={cn(className, 'py-24')} {...props}>
+		<div id='#contact' className={cn(className, 'py-24')} {...props}>
 			<div className="container">
 				<h1 className="defaultHeading uppercase text-2xl md:text-3xl lg:text-4xl text-center mb-2 sm:mb-3 md:mb-5 tracking-wide">
 					Contact us
