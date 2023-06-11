@@ -1,20 +1,26 @@
-type renovation = {
+type IRenovation = {
 	id: number
 	name: string
 	description: string
 	price: number
 	imgsrc: string
+	characteristics: string[]
 }
 
-type comment = {
+export type ICommentRes = {
 	id: number
+	userName: string
 	renovationId: number
 	message: string
 }
 
-export interface IRenovationAdditionalData {
-	comments: comment[]
-	rating: number
-	characteristics: string[]
+export type ICommentReq = {
+	userName: string
+	message: string
 }
-export type IRenovationResponse = renovation & IRenovationAdditionalData
+
+export interface IRenovationAdditionalData {
+	comments: ICommentRes[]
+	rating: number
+}
+export type IRenovationResponse = IRenovation & IRenovationAdditionalData

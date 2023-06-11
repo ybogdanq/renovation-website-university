@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { renovation } from '@prisma/client';
+import { comment, renovation } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { IRenovationAdditionalData } from 'src/types/Renovation';
+import { ICommentReq, IRenovationAdditionalData } from 'src/types/Renovation';
 
 @Injectable()
 export class RenovationService {
@@ -21,7 +21,7 @@ export class RenovationService {
   }
 
   async getRenovationItem(
-    renovationId: number,
+    renovationId: string,
   ): Promise<IRenovationAdditionalData> {
     console.log(renovationId);
 
@@ -47,11 +47,6 @@ export class RenovationService {
         renovationId: renovation.id,
       },
     });
-    const characteristics = await this.prismaService.characteristic.findMany({
-      where: {
-        renovationId: renovation.id,
-      },
-    });
     const rating = await this.prismaService.rating.findFirst({
       where: {
         renovationId: renovation.id,
@@ -60,8 +55,26 @@ export class RenovationService {
     return {
       ...renovation,
       comments,
-      characteristics: characteristics.map((char) => char.name),
       rating: rating.rating || 0,
     };
+  }
+
+  async addNewComment(
+    renovationId: string,
+    commentData: ICommentReq,
+  ): Promise<comment> {
+    const comment = await this.prismaService.comment.create({
+      data: {
+        renovationId: Number(renovationId),
+        message: commentData.message,
+      },
+    });
+    if (!comment) {
+      throw new HttpException(
+        'Comment could not be created...',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    return comment;
   }
 }

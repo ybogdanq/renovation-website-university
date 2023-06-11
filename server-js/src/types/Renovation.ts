@@ -5,4 +5,10 @@ export interface IRenovationAdditionalData {
   rating: number;
   characteristics: string[];
 }
+
+export type ICommentReq = {
+  userName: string;
+  message: string;
+};
+
 export type IRenovationResponse = renovation & IRenovationAdditionalData;

@@ -23,6 +23,14 @@ let DataMockController = class DataMockController {
                 name: 'Living room',
                 description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
                 price: 1900,
+                characteristics: [
+                    'dimension drawing',
+                    'layout with arrangement of furniture and equipment',
+                    'preliminary selection of finishing materials, furniture and other key design elements',
+                    '3D visualization with real-existing key design elements',
+                    'updated furniture plan with purchase recommendations',
+                    'dimensional drawings of custom-made furniture',
+                ],
                 comment: {
                     create: {
                         message: 'We were very satisfied with the design, all our dreams of a beautiful apartment are a reality, now we are waiting for the completion of the repair.',
@@ -32,9 +40,6 @@ let DataMockController = class DataMockController {
                     create: {
                         rating: 4,
                     },
-                },
-                characteristics: {
-                    create: { name: '1 category' },
                 },
                 imgsrc: 'https://www.ikea.com/images/a-light-living-room-centred-around-a-jaettebo-three-and-a-ha-d80334e03b4e4094d0e02846c7de2e85.jpg',
             },

@@ -9,7 +9,7 @@ export default async function RenovationItem({ params }: PageProps) {
 	const renovationId = params.renovationId as unknown as number
 	const queryClient = getQueryClient()
 	await queryClient.prefetchQuery(
-		['hydrate-renovation'],
+		['get-renovation'],
 		async () => await RenovationService.getRenovationById(renovationId)
 	)
 	const dehydratedState = dehydrate(queryClient)

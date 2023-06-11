@@ -1,16 +1,22 @@
 import $api from '@/http/index'
-import { IRenovationResponse } from '@/types/Renovation'
-import { AxiosResponse } from 'axios'
+import { ICommentReq, ICommentRes, IRenovationResponse } from '@/types/Renovation'
 
 export default class RenovationService {
-	static async getAllRenovations(): Promise<AxiosResponse<IRenovationResponse[]>> {
-		return await $api.get<IRenovationResponse[]>('/renovation/all')
+	static async getAllRenovations(): Promise<IRenovationResponse[]> {
+		const res = await $api.get('/renovation/all')
+		return res.data
 	}
-	static async getRenovationById(id: number) {
-		const res = await fetch('http://localhost:5212/renovation/' + id)
-		console.log(res)
-		const renovation = (await res.json()) as IRenovationResponse
-
-		return renovation
+	static async getRenovationById(id: number): Promise<IRenovationResponse> {
+		const res = await $api.get<IRenovationResponse>('/renovation/' + id)
+		return res.data
+	}
+	static async leaveCommentToRenovation(
+		commentData: ICommentReq,
+		renovationId: number
+	): Promise<ICommentRes> {
+		const res = await $api.post<ICommentRes>('/renovation/comment/' + renovationId, {
+			commentData
+		})
+		return res.data
 	}
 }

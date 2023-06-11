@@ -27,6 +27,10 @@ let RenovationController = class RenovationController {
         const renovationItem = await this.renovationService.getRenovationItem(renovationId);
         return renovationItem;
     }
+    async addNewComment(renovationId, body) {
+        const comment = await this.renovationService.addNewComment(renovationId, body.commentData);
+        return comment;
+    }
 };
 __decorate([
     (0, common_1.Get)('all'),
@@ -38,9 +42,17 @@ __decorate([
     (0, common_1.Get)(':renovationId'),
     __param(0, (0, common_1.Param)('renovationId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], RenovationController.prototype, "getRenovationItem", null);
+__decorate([
+    (0, common_1.Post)('/comment/:renovationId'),
+    __param(0, (0, common_1.Param)('renovationId')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], RenovationController.prototype, "addNewComment", null);
 RenovationController = __decorate([
     (0, common_1.Controller)('renovation'),
     __metadata("design:paramtypes", [renovation_service_1.RenovationService])

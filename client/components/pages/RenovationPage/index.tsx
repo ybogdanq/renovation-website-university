@@ -23,7 +23,7 @@ export const RenovationPage: FC<Props> = ({ className, ...props }) => {
 	const renovationId = params.renovationId as unknown as number
 
 	const { data, isLoading, isFetching, error } = useQuery({
-		queryKey: ['hydrate-renovation'],
+		queryKey: ['get-renovation'],
 		queryFn: () => RenovationService.getRenovationById(renovationId)
 	})
 
@@ -105,14 +105,14 @@ export const RenovationPage: FC<Props> = ({ className, ...props }) => {
 							{data.price}$
 						</span>
 						<ul className="pl-5 list-disc">
-							{data.characteristics.map((char, i) => (
+							{data.characteristics && data.characteristics.map((char, i) => (
 								<li key={i}>{char}</li>
 							))}
 						</ul>
 					</div>
 
 					<OtherWorks />
-					<Comments />
+					<Comments comments={data.comments} />
 					<Feedback />
 				</div>
 			</div>
