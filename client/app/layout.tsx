@@ -1,6 +1,7 @@
 import { Header } from '@/components/Header'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import Providers from '@/utils/react-query/provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,7 +15,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html lang="en">
 			<body className={inter.className}>
 				<Header />
-				<div className="pageContent">{children}</div>
+				<div className="pageContent">
+					<Providers>{children}</Providers>
+				</div>
 			</body>
 		</html>
 	)

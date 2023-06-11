@@ -10,6 +10,8 @@
 		"svg": "svgr -d components/icons components/icons/svgs"
 	},
 	"dependencies": {
+		"@tanstack/react-query": "^4.29.12",
+		"@tanstack/react-query-devtools": "^4.29.12",
 		"@types/axios": "^0.14.0",
 		"@types/node": "20.1.0",
 		"@types/react": "18.2.6",

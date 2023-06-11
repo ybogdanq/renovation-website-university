@@ -1,5 +1,5 @@
 import { Homepage } from '@/components/pages/HomePage/index'
 
-export default function Home() {
+export default async function Home() {
 	return <Homepage />
 }
