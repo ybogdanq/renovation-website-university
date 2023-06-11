@@ -1,11 +1,6 @@
-import { comment, renovation } from '@prisma/client';
+import { renovation } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-export interface IRenovationAdditionalData {
-    comments: comment[];
-    rating: number;
-    characteristics: string[];
-}
-export type IRenovationResponse = renovation & IRenovationAdditionalData;
+import { IRenovationAdditionalData } from 'src/types/Renovation';
 export declare class RenovationService {
     private prismaService;
     constructor(prismaService: PrismaService);

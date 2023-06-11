@@ -1,13 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { comment, renovation } from '@prisma/client';
+import { renovation } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-
-export interface IRenovationAdditionalData {
-  comments: comment[];
-  rating: number;
-  characteristics: string[];
-}
-export type IRenovationResponse = renovation & IRenovationAdditionalData;
+import { IRenovationAdditionalData } from 'src/types/Renovation';
 
 @Injectable()
 export class RenovationService {
@@ -29,6 +23,8 @@ export class RenovationService {
   async getRenovationItem(
     renovationId: number,
   ): Promise<IRenovationAdditionalData> {
+    console.log(renovationId);
+
     const renovationItem = await this.prismaService.renovation.findFirst({
       where: {
         id: Number(renovationId),

@@ -28,6 +28,7 @@ let RenovationService = class RenovationService {
         return renovationData;
     }
     async getRenovationItem(renovationId) {
+        console.log(renovationId);
         const renovationItem = await this.prismaService.renovation.findFirst({
             where: {
                 id: Number(renovationId),

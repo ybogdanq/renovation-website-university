@@ -15,17 +15,10 @@ model renovation {
   name            String
   description     String
   price           Int
-  characteristics characteristic[]
+  characteristics String[]
   comment         comment[]
   rating          rating[]
   imgsrc          String
-}
-
-model characteristic {
-  id           Int         @id @default(autoincrement())
-  name         String
-  renovation   renovation? @relation(fields: [renovationId], references: [id])
-  renovationId Int?
 }
 
 model comment {

@@ -10,10 +10,10 @@ export class DataMockController {
 
     const data = await this.prismaService.renovation.create({
       data: {
-        name: 'Kitchen',
+        name: 'Living room',
         description:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-        price: 100,
+        price: 1900,
         comment: {
           create: {
             message:
@@ -22,14 +22,14 @@ export class DataMockController {
         },
         rating: {
           create: {
-            rating: 5,
+            rating: 4,
           },
         },
         characteristics: {
           create: { name: '1 category' },
         },
         imgsrc:
-          'https://media.architecturaldigest.com/photos/6442da171870ecdbed029950/16:9/w_5521,h_3105,c_limit/AVD%20House%20-%20High%20Res-061.jpg',
+          'https://www.ikea.com/images/a-light-living-room-centred-around-a-jaettebo-three-and-a-ha-d80334e03b4e4094d0e02846c7de2e85.jpg',
       },
     });
     return data;
