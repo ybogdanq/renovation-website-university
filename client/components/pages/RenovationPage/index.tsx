@@ -12,7 +12,7 @@ import { default as SwiperType, Navigation } from 'swiper'
 import { Feedback } from './sections/Feedback'
 import { OtherWorks } from './sections/OtherWorks'
 import { Comments } from './sections/Comments'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import RenovationService from '@/services/RenovationService'
 import { useParams } from 'next/navigation'
 
@@ -21,11 +21,17 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDi
 export const RenovationPage: FC<Props> = ({ className, ...props }) => {
 	const params = useParams()
 	const renovationId = params.renovationId as unknown as number
+	const queryClient = useQueryClient()
 
 	const { data, isLoading, isFetching, error } = useQuery({
 		queryKey: ['get-renovation'],
 		queryFn: () => RenovationService.getRenovationById(renovationId)
 	})
+
+	const { mutate: mutateRating } = useMutation(
+		async (newRating: number) => await RenovationService.addNewRatingItem(renovationId, newRating),
+		{ onSuccess: () => queryClient.invalidateQueries({ queryKey: ['get-renovation'] }) }
+	)
 
 	const [rating, setRating] = useState<number>(4.2)
 	const sliderRef = useRef(null)
@@ -93,7 +99,7 @@ export const RenovationPage: FC<Props> = ({ className, ...props }) => {
 								rating={data.rating}
 								starRatedColor="#FFD233"
 								starHoverColor="#FFD233"
-								changeRating={newRating => setRating(newRating)}
+								changeRating={newRating => mutateRating(newRating)}
 								starDimension="30px"
 								starSpacing="2px"
 								numberOfStars={5}
@@ -105,9 +111,8 @@ export const RenovationPage: FC<Props> = ({ className, ...props }) => {
 							{data.price}$
 						</span>
 						<ul className="pl-5 list-disc">
-							{data.characteristics && data.characteristics.map((char, i) => (
-								<li key={i}>{char}</li>
-							))}
+							{data.characteristics &&
+								data.characteristics.map((char, i) => <li key={i}>{char}</li>)}
 						</ul>
 					</div>
 

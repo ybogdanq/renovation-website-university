@@ -16,13 +16,10 @@ export const Feedback: FC<Props> = ({ className, ...props }) => {
 
 	const { mutate: addCommentAction, isLoading } = useMutation(
 		async () =>
-			await RenovationService.leaveCommentToRenovation(
-				{
-					userName: name,
-					message
-				},
-				renovationId
-			),
+			await RenovationService.leaveCommentToRenovation(renovationId, {
+				userName: name,
+				message
+			}),
 		{
 			onError: () => {
 				console.error('Error to post new comment to renovation')

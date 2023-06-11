@@ -45,12 +45,16 @@ let RenovationService = class RenovationService {
                 renovationId: renovation.id,
             },
         });
-        const rating = await this.prismaService.rating.findFirst({
+        const rating = await this.prismaService.rating.findMany({
             where: {
                 renovationId: renovation.id,
             },
         });
-        return Object.assign(Object.assign({}, renovation), { comments, rating: rating.rating || 0 });
+        const avgRating = rating.length === 0
+            ? 0
+            : rating.reduce((acc, ratingItem) => acc + ratingItem.rating, 0) /
+                rating.length;
+        return Object.assign(Object.assign({}, renovation), { comments, rating: avgRating });
     }
     async addNewComment(renovationId, commentData) {
         const comment = await this.prismaService.comment.create({
@@ -63,6 +67,18 @@ let RenovationService = class RenovationService {
             throw new common_1.HttpException('Comment could not be created...', common_1.HttpStatus.BAD_REQUEST);
         }
         return comment;
+    }
+    async addNewRatingItem(renovationId, ratingCount) {
+        const newRating = await this.prismaService.rating.create({
+            data: {
+                renovationId: Number(renovationId),
+                rating: ratingCount,
+            },
+        });
+        if (!newRating) {
+            throw new common_1.HttpException('Rating could not be changed...', common_1.HttpStatus.BAD_REQUEST);
+        }
+        return newRating;
     }
 };
 RenovationService = __decorate([

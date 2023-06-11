@@ -1,5 +1,5 @@
 import $api from '@/http/index'
-import { ICommentReq, ICommentRes, IRenovationResponse } from '@/types/Renovation'
+import { ICommentReq, ICommentRes, IRatingRes, IRenovationResponse } from '@/types/Renovation'
 
 export default class RenovationService {
 	static async getAllRenovations(): Promise<IRenovationResponse[]> {
@@ -11,11 +11,17 @@ export default class RenovationService {
 		return res.data
 	}
 	static async leaveCommentToRenovation(
-		commentData: ICommentReq,
-		renovationId: number
+		renovationId: number,
+		commentData: ICommentReq
 	): Promise<ICommentRes> {
 		const res = await $api.post<ICommentRes>('/renovation/comment/' + renovationId, {
 			commentData
+		})
+		return res.data
+	}
+	static async addNewRatingItem(renovationId: number, ratingCount: number): Promise<IRatingRes> {
+		const res = await $api.post<IRatingRes>('/renovation/rating/' + renovationId, {
+			ratingCount
 		})
 		return res.data
 	}

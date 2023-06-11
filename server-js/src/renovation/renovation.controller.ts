@@ -31,4 +31,16 @@ export class RenovationController {
     );
     return comment;
   }
+
+  @Post('/rating/:renovationId')
+  async addNewRatingItem(
+    @Param('renovationId') renovationId: string,
+    @Body() body: { ratingCount: number },
+  ) {
+    const ratingItem = await this.renovationService.addNewRatingItem(
+      renovationId,
+      body.ratingCount,
+    );
+    return ratingItem;
+  }
 }

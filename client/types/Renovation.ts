@@ -19,6 +19,12 @@ export type ICommentReq = {
 	message: string
 }
 
+export type IRatingRes = {
+	id: number
+	renovationId: number
+	rating: number
+}
+
 export interface IRenovationAdditionalData {
 	comments: ICommentRes[]
 	rating: number

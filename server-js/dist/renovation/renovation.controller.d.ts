@@ -8,4 +8,7 @@ export declare class RenovationController {
     addNewComment(renovationId: string, body: {
         commentData: ICommentReq;
     }): Promise<import(".prisma/client").comment>;
+    addNewRatingItem(renovationId: string, body: {
+        ratingCount: number;
+    }): Promise<import(".prisma/client").rating>;
 }

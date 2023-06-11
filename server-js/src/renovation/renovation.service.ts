@@ -1,7 +1,11 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { comment, renovation } from '@prisma/client';
+import { comment, rating, renovation } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { ICommentReq, IRenovationAdditionalData } from 'src/types/Renovation';
+import {
+  ICommentReq,
+  IRenovationAdditionalData,
+  IRenovationResponse,
+} from 'src/types/Renovation';
 
 @Injectable()
 export class RenovationService {
@@ -47,15 +51,20 @@ export class RenovationService {
         renovationId: renovation.id,
       },
     });
-    const rating = await this.prismaService.rating.findFirst({
+    const rating = await this.prismaService.rating.findMany({
       where: {
         renovationId: renovation.id,
       },
     });
+    const avgRating =
+      rating.length === 0
+        ? 0
+        : rating.reduce((acc, ratingItem) => acc + ratingItem.rating, 0) /
+          rating.length;
     return {
       ...renovation,
       comments,
-      rating: rating.rating || 0,
+      rating: avgRating,
     };
   }
 
@@ -76,5 +85,24 @@ export class RenovationService {
       );
     }
     return comment;
+  }
+
+  async addNewRatingItem(
+    renovationId: string,
+    ratingCount: number,
+  ): Promise<rating> {
+    const newRating = await this.prismaService.rating.create({
+      data: {
+        renovationId: Number(renovationId),
+        rating: ratingCount,
+      },
+    });
+    if (!newRating) {
+      throw new HttpException(
+        'Rating could not be changed...',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    return newRating;
   }
 }
