@@ -1,16 +1,35 @@
 'use client'
-import React, { DetailedHTMLProps, FC, HTMLAttributes, useState } from 'react'
+import React, { ChangeEvent, DetailedHTMLProps, FC, HTMLAttributes, useState } from 'react'
 import cn from 'classnames'
 import { Search } from './icons/index'
 import { usePathname } from 'next/navigation'
 import useWindowWidth from '@/utils/hooks/useWindowWidth'
+import { ClientRoutesEnum } from '@/types/ClientRoutesEnum'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { QueryKeys } from '@/types/QueryKeys'
+import RenovationService from '@/services/RenovationService'
+import Link from 'next/link'
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
 export const Header: FC<Props> = ({ className, ...props }) => {
+	const [searchValue, setSearchValue] = useState<string>('')
 	const [isBurgerActive, setIsBurgerActive] = useState(false)
 	const pathname = usePathname()
 	const windowWidth = useWindowWidth()
+	const queryClient = useQueryClient()
+
+	const { data: allRenovations } = useQuery({
+		queryKey: [QueryKeys.GetAllRenovations],
+		queryFn: () => RenovationService.getAllRenovations()
+	})
+
+	const filteredRenovations =
+		(allRenovations &&
+			allRenovations.filter(renovation => {
+				return renovation.name.toLocaleLowerCase().includes(searchValue) && searchValue
+			})) ||
+		[]
 
 	return (
 		<header
@@ -47,7 +66,7 @@ export const Header: FC<Props> = ({ className, ...props }) => {
 					)}
 					<ul className="flex flex-col md:flex-row align-middle md:[&>*]:mr-3 [&>*]:cursor-pointer [&>*]:duration-200 [&>*:hover]:text-slate-200 [&>*:hover]:underline [&>*]:leading-8">
 						<li>
-							<a href="/">Home</a>
+							<a href={ClientRoutesEnum.Index}>Home</a>
 						</li>
 						<li>
 							<a href="/#inspiration">Inspiration</a>
@@ -60,8 +79,10 @@ export const Header: FC<Props> = ({ className, ...props }) => {
 						</li>
 					</ul>
 				</nav>
-				<div className="border-b-2 border-white flex align-middle">
+				<div className="relative border-b-2 border-white flex align-middle">
 					<input
+						value={searchValue}
+						onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
 						placeholder="Search"
 						type="text"
 						className="placeholder:text-white max-w-[100px] md:max-w-xs w-full outline-none pb-1 text-white bg-transparent text-sm leading-6"
@@ -69,6 +90,18 @@ export const Header: FC<Props> = ({ className, ...props }) => {
 					<button className="scale-[80%]">
 						<Search />
 					</button>
+					{filteredRenovations.length > 0 && (
+						<div
+							id={'results'}
+							className="absolute right-0 -bottom-3 translate-y-[100%] bg-white min-w-[200px] py-2 px-3 border-2 border-black-600"
+						>
+							{filteredRenovations.map(renovation => (
+								<Link key={renovation.id} href={ClientRoutesEnum.RenovationItem + renovation.id}>
+									<div onClick={() => setSearchValue('')}>{renovation.name}</div>
+								</Link>
+							))}
+						</div>
+					)}
 				</div>
 			</div>
 		</header>

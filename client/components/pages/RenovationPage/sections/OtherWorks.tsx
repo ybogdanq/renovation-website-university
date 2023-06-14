@@ -6,11 +6,19 @@ import { ProductImage } from '../../blocks/ProductImage'
 import KitchenImg from '../../HomePage/assets/kitchen.png'
 import LivingRoomImg from '../../HomePage/assets/livingRoom.png'
 import useWindowWidth from '@/utils/hooks/useWindowWidth'
+import { IRenovationResponse } from '@/types/Renovation'
+import { ClientRoutesEnum } from '@/types/ClientRoutesEnum'
 
-interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+	currentRenovation: IRenovationResponse
+	renovations: IRenovationResponse[]
+}
 
-export const OtherWorks: FC<Props> = ({ className, ...props }) => {
+export const OtherWorks: FC<Props> = ({ currentRenovation, renovations, className, ...props }) => {
 	const windowWidth = useWindowWidth()
+	const filteredRenovations = renovations.filter(
+		renovation => renovation.id !== currentRenovation.id
+	)
 	return (
 		<div className={cn(className)} {...props}>
 			<div className="container py-24">
@@ -24,18 +32,15 @@ export const OtherWorks: FC<Props> = ({ className, ...props }) => {
 					onSlideChange={() => console.log('slide change')}
 					onSwiper={swiper => console.log(swiper)}
 				>
-					<SwiperSlide className="px-10">
-						<ProductImage image={LivingRoomImg} productTitle="Living room" />
-					</SwiperSlide>
-					<SwiperSlide className="px-10">
-						<ProductImage image={KitchenImg} productTitle="Kitchen" />
-					</SwiperSlide>
-					<SwiperSlide className="px-10">
-						<ProductImage image={LivingRoomImg} productTitle="Living room" />
-					</SwiperSlide>
-					<SwiperSlide className="px-10">
-						<ProductImage image={KitchenImg} productTitle="Kitchen" />
-					</SwiperSlide>
+					{filteredRenovations.map(renovation => (
+						<SwiperSlide key={renovation.id} className="px-10">
+							<ProductImage
+								link={ClientRoutesEnum.RenovationItem + renovation.id}
+								image={renovation.imgsrc}
+								productTitle={renovation.name}
+							/>
+						</SwiperSlide>
+					))}
 				</Swiper>
 			</div>
 		</div>

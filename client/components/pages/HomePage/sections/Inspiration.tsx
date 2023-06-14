@@ -8,13 +8,20 @@ import { ProductImage } from '../../blocks/ProductImage'
 import KitchenImg from '../assets/kitchen.png'
 import LivingRoomImg from '../assets/livingRoom.png'
 import useWindowWidth from '@/utils/hooks/useWindowWidth'
+import { useQuery } from '@tanstack/react-query'
+import RenovationService from '@/services/RenovationService'
+import { QueryKeys } from '@/types/QueryKeys'
+import { IRenovationResponse } from '@/types/Renovation'
+import { ClientRoutesEnum } from '@/types/ClientRoutesEnum'
 
-interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+	renovations: IRenovationResponse[]
+}
 
-export const Inspiration: FC<Props> = ({ className, ...props }) => {
+export const Inspiration: FC<Props> = ({ renovations, className, ...props }) => {
 	const windowWidth = useWindowWidth()
 	return (
-		<div id='#inspiration' className={cn(className)} {...props}>
+		<div id="inspiration" className={cn(className)} {...props}>
 			<div className="container py-24">
 				<h1 className="defaultHeading text-center text-2xl md:text-3xl lg:text-4xl tracking-wide mb-10">
 					Inspiration
@@ -25,19 +32,17 @@ export const Inspiration: FC<Props> = ({ className, ...props }) => {
 					slidesPerView={windowWidth > 768 ? 2 : 1}
 					onSlideChange={() => console.log('slide change')}
 					onSwiper={swiper => console.log(swiper)}
+					centeredSlides
 				>
-					<SwiperSlide className="px-10">
-						<ProductImage image={LivingRoomImg} productTitle="Living room" />
-					</SwiperSlide>
-					<SwiperSlide className="px-10">
-						<ProductImage image={KitchenImg} productTitle="Kitchen" />
-					</SwiperSlide>
-					<SwiperSlide className="px-10">
-						<ProductImage image={LivingRoomImg} productTitle="Living room" />
-					</SwiperSlide>
-					<SwiperSlide className="px-10">
-						<ProductImage image={KitchenImg} productTitle="Kitchen" />
-					</SwiperSlide>
+					{renovations.map(renovation => (
+						<SwiperSlide key={renovation.id} className="px-10">
+							<ProductImage
+								link={ClientRoutesEnum.RenovationItem + renovation.id}
+								image={renovation.imgsrc}
+								productTitle={renovation.name}
+							/>
+						</SwiperSlide>
+					))}
 				</Swiper>
 			</div>
 		</div>

@@ -15,6 +15,9 @@ import { Comments } from './sections/Comments'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import RenovationService from '@/services/RenovationService'
 import { useParams } from 'next/navigation'
+import { createNotification } from '@/utils/createNotification'
+import { NotificationContainer } from 'react-notifications'
+import { QueryKeys } from '@/types/QueryKeys'
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
@@ -23,15 +26,32 @@ export const RenovationPage: FC<Props> = ({ className, ...props }) => {
 	const renovationId = params.renovationId as unknown as number
 	const queryClient = useQueryClient()
 
-	const { data, isLoading, isFetching, error } = useQuery({
-		queryKey: ['get-renovation'],
+	const {
+		data: renovationItem,
+		isLoading,
+		isFetching,
+		error
+	} = useQuery({
+		queryKey: [QueryKeys.GetRenovation],
 		queryFn: () => RenovationService.getRenovationById(renovationId)
 	})
 
-	const { mutate: mutateRating } = useMutation(
-		async (newRating: number) => await RenovationService.addNewRatingItem(renovationId, newRating),
-		{ onSuccess: () => queryClient.invalidateQueries({ queryKey: ['get-renovation'] }) }
-	)
+	const { data: allRenovations } = useQuery({
+		queryKey: [QueryKeys.GetAllRenovations],
+		queryFn: () => RenovationService.getAllRenovations()
+	})
+
+	const { mutate: mutateRating } = useMutation({
+		mutationFn: async (newRating: number) =>
+			await RenovationService.addNewRatingItem(renovationId, newRating),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: [QueryKeys.GetRenovation] })
+			createNotification('success')
+		},
+		onError: () => {
+			createNotification('error')
+		}
+	})
 
 	const [rating, setRating] = useState<number>(4.2)
 	const sliderRef = useRef(null)
@@ -51,7 +71,7 @@ export const RenovationPage: FC<Props> = ({ className, ...props }) => {
 	if (isFetching || isLoading) {
 		return <>loading...</>
 	}
-	if (error || !data) {
+	if (error || !renovationItem) {
 		return <>error...</>
 	}
 
@@ -77,7 +97,7 @@ export const RenovationPage: FC<Props> = ({ className, ...props }) => {
 								<InView triggerOnce>
 									<div className="relative w-full h-0 pt-[50%] mb-8">
 										<Image
-											src={data.imgsrc || ''}
+											src={renovationItem.imgsrc || ''}
 											quality={100}
 											className={cn(
 												'styledImage styledImage-inView absolute top-0 left-0 right-0 bottom-0 object-cover'
@@ -93,32 +113,34 @@ export const RenovationPage: FC<Props> = ({ className, ...props }) => {
 					<div>
 						<div className="flex items-center justify-between mb-7">
 							<h1 className="defaultHeading uppercase not-italic tracking-wider font-bold text-3xl">
-								{data.name}
+								{renovationItem.name}
 							</h1>
 							<StarRatings
-								rating={data.rating}
+								rating={renovationItem.rating}
 								starRatedColor="#FFD233"
 								starHoverColor="#FFD233"
-								changeRating={newRating => mutateRating(newRating)}
+								changeRating={newRating => {
+									mutateRating(newRating)
+								}}
 								starDimension="30px"
 								starSpacing="2px"
 								numberOfStars={5}
 								name="rating"
 							/>
 						</div>
-						<p className="defaultText max-w-4xl mb-7">{data.description}</p>
+						<p className="defaultText max-w-4xl mb-7">{renovationItem.description}</p>
 						<span className="inline-block font-bold tracking-wider text-xl mb-7">
-							{data.price}$
+							{renovationItem.price}$
 						</span>
 						<ul className="pl-5 list-disc">
-							{data.characteristics &&
-								data.characteristics.map((char, i) => <li key={i}>{char}</li>)}
+							{renovationItem.characteristics &&
+								renovationItem.characteristics.map((char, i) => <li key={i}>{char}</li>)}
 						</ul>
 					</div>
-
-					<OtherWorks />
-					<Comments comments={data.comments} />
+					<OtherWorks renovations={allRenovations || []} currentRenovation={renovationItem} />
+					<Comments comments={renovationItem.comments} />
 					<Feedback />
+					<NotificationContainer />
 				</div>
 			</div>
 		</div>
