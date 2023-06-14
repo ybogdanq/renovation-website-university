@@ -1,16 +1,32 @@
-import { PageProps } from '@/.next/types/app/layout'
 import { RenovationPage } from '@/components/pages/RenovationPage'
 import RenovationService from '@/services/RenovationService'
+import { QueryKeys } from '@/types/QueryKeys'
 import getQueryClient from '@/utils/react-query/getQueryClient'
 import { Hydrate, dehydrate } from '@tanstack/react-query'
+import { NextPage } from 'next'
 import { useParams } from 'next/navigation'
+import { use } from 'react'
 
-export default async function RenovationItem({ params }: PageProps) {
-	const renovationId = params.renovationId as unknown as number
+interface Props {
+	params: {
+		renovationId: number
+	}
+}
+
+const RenovationItem: NextPage<Props> = ({ params }) => {
+	const renovationId = params.renovationId
 	const queryClient = getQueryClient()
-	await queryClient.prefetchQuery(
-		['get-renovation'],
-		async () => await RenovationService.getRenovationById(renovationId)
+	use(
+		queryClient.prefetchQuery(
+			[QueryKeys.GetRenovation],
+			async () => await RenovationService.getRenovationById(renovationId)
+		)
+	)
+	use(
+		queryClient.prefetchQuery(
+			[QueryKeys.GetAllRenovations],
+			async () => await RenovationService.getAllRenovations()
+		)
 	)
 	const dehydratedState = dehydrate(queryClient)
 	return (
@@ -19,3 +35,5 @@ export default async function RenovationItem({ params }: PageProps) {
 		</Hydrate>
 	)
 }
+
+export default RenovationItem

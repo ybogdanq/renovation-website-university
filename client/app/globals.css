@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'react-notifications/lib/notifications.css';
 
 @layer components {
 	.defaultBtn {

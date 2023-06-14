@@ -4,6 +4,8 @@ import { Button, Input, Textarea } from '@ui'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import RenovationService from '@/services/RenovationService'
 import { useParams } from 'next/navigation'
+import { QueryKeys } from '@/types/QueryKeys'
+import { createNotification } from '@/utils/createNotification'
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
@@ -14,24 +16,27 @@ export const Feedback: FC<Props> = ({ className, ...props }) => {
 	const [message, setMessage] = useState<string>('')
 	const queryClient = useQueryClient()
 
-	const { mutate: addCommentAction, isLoading } = useMutation(
-		async () =>
+	const { mutate: addCommentAction, isLoading } = useMutation({
+		mutationFn: async () =>
 			await RenovationService.leaveCommentToRenovation(renovationId, {
 				userName: name,
 				message
 			}),
-		{
-			onError: () => {
-				console.error('Error to post new comment to renovation')
-			},
-			onSuccess: () => {
-				queryClient.invalidateQueries({ queryKey: ['get-renovation'] })
-			}
+		onError: () => {
+			console.error('Error to post new comment to renovation')
+		},
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: [QueryKeys.GetRenovation] })
 		}
-	)
+	})
 
-	const addNewComment = async (e: React.MouseEvent<HTMLButtonElement>) => {
-		// e.preventDefault()
+	const addNewComment = async () => {
+		if (!name) {
+			return createNotification('error')
+		}
+		if (!message) {
+			return createNotification('error')
+		}
 		addCommentAction()
 	}
 
