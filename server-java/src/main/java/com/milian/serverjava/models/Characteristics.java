@@ -9,11 +9,12 @@ public class Characteristics {
     @Id
     private String id;
     private String name;
+    private String renovationId;
 
-
-    public Characteristics(String id, String name) {
+    public Characteristics(String id, String name, String renovationId) {
         this.id = id;
         this.name = name;
+        this.renovationId = renovationId;
     }
 
     public Characteristics() {
@@ -33,5 +34,13 @@ public class Characteristics {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getRenovationId() {
+        return renovationId;
+    }
+
+    public void setRenovationId(String renovationId) {
+        this.renovationId = renovationId;
     }
 }

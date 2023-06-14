@@ -13,6 +13,9 @@ import java.util.List;
 @Repository
 public interface CharacteristicsRepository extends CrudRepository<Characteristics, String> {
 
-    @Query("SELECT c FROM Characteristics c WHERE c.id IN :ids")
-    ArrayList<Characteristics> findAllByIds(@Param("ids") List<String> ids);
+//    @Query("SELECT c FROM Characteristics c WHERE c.id IN :ids")
+//    ArrayList<Characteristics> findAllByIds(@Param("ids") List<String> ids);
+
+    @Query("SELECT c FROM Characteristics c WHERE c.renovationId = ?1")
+    ArrayList<Characteristics> findAllById(String id);
 }
