@@ -73,8 +73,9 @@ public class RenovationController {
     public ArrayList<Characteristics> getCharacteristicsByRenovationId(String renovationId) {
         Renovation renovation = renovationRepository.findById(renovationId).orElse(null);
         if (renovation != null) {
-            ArrayList<String> ids = new ArrayList<>(Arrays.asList(renovation.getCharacteristicsIds().split(",\\s*")));
-            return characteristicsRepository.findAllByIds(ids);
+//            ArrayList<String> ids = new ArrayList<>(Arrays.asList(renovation.getCharacteristicsIds().split(",\\s*")));
+
+            return characteristicsRepository.findAllById(renovationId);
         }
         return new ArrayList<>();
     }
