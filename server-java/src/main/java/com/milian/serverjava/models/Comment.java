@@ -10,15 +10,16 @@ public class Comment {
     private String id;
     private String renovationId;
     private String message;
-
+    private String username;
 
     public Comment() {
     }
 
-    public Comment(String id, String renovationId, String message) {
+    public Comment(String id, String renovationId, String message, String username) {
         this.id = id;
         this.renovationId = renovationId;
         this.message = message;
+        this.username = username;
     }
 
     public String getMessage() {
@@ -43,5 +44,13 @@ public class Comment {
 
     public void setRenovationId(String renovationId) {
         this.renovationId = renovationId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

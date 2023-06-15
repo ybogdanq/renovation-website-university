@@ -5,6 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Transient;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Renovation {
@@ -14,7 +15,7 @@ public class Renovation {
     private String name;
     private String description;
     private Integer price;
-    private String imgsrc;
+    private List<String> imgsrc;
     @Transient
     private ArrayList<Characteristics> characteristics;
     @Transient
@@ -27,7 +28,7 @@ public class Renovation {
     public Renovation() {
     }
 
-    public Renovation(String id, String name, String description, Integer price, String imgsrc) {
+    public Renovation(String id, String name, String description, Integer price, List<String> imgsrc) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -43,11 +44,11 @@ public class Renovation {
         this.images = images;
     }
 
-    public String getImgsrc() {
+    public List<String> getImgsrc() {
         return imgsrc;
     }
 
-    public void setImgsrc(String imgsrc) {
+    public void setImgsrc(List<String> imgsrc) {
         this.imgsrc = imgsrc;
     }
     public void setId(String id) {

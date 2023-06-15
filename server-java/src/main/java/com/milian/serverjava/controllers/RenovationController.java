@@ -65,7 +65,7 @@ public class RenovationController {
         renovationFinal.setComments(comments);
         renovationFinal.setRatings(ratings);
         renovationFinal.setCharacteristics(characteristics);
-        renovationFinal.setImages(getImagesSeparated(id.toString()));
+//        renovationFinal.setImages(getImagesSeparated(id.toString()));
 
         return renovationFinal;
     }
@@ -80,11 +80,11 @@ public class RenovationController {
         return new ArrayList<>();
     }
 
-    public ArrayList<String> getImagesSeparated(String renovationId) {
-        Renovation renovation = renovationRepository.findById(renovationId).orElse(null);
-        if (renovation != null) {
-            return  new ArrayList<>(Arrays.asList(renovation.getImgsrc().split(",\\s*")));
-        }
-        return new ArrayList<>();
-    }
+//    public ArrayList<String> getImagesSeparated(String renovationId) {
+//        Renovation renovation = renovationRepository.findById(renovationId).orElse(null);
+//        if (renovation != null) {
+//            return  new ArrayList<>(Arrays.asList(renovation.getImgsrc().split(",\\s*")));
+//        }
+//        return new ArrayList<>();
+//    }
 }
