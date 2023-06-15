@@ -74,6 +74,7 @@ export class RenovationService {
   ): Promise<comment> {
     const comment = await this.prismaService.comment.create({
       data: {
+        userName: commentData.userName,
         renovationId: Number(renovationId),
         message: commentData.message,
       },

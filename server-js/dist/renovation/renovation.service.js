@@ -59,6 +59,7 @@ let RenovationService = class RenovationService {
     async addNewComment(renovationId, commentData) {
         const comment = await this.prismaService.comment.create({
             data: {
+                userName: commentData.userName,
                 renovationId: Number(renovationId),
                 message: commentData.message,
             },

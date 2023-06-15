@@ -18,12 +18,13 @@ model renovation {
   characteristics String[]  @default([])
   comment         comment[]
   rating          rating[]
-  imgsrc          String
+  imgsrc          String[]
 }
 
 model comment {
   id           Int        @id @default(autoincrement())
   renovationId Int
+  userName     String
   message      String
   renovation   renovation @relation(fields: [renovationId], references: [id])
 }
