@@ -9,26 +9,24 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDi
 }
 
 export const Comments: FC<Props> = ({ comments, className, ...props }) => {
-	return (
+	return !comments || comments?.length === 0 ? (
+		<></>
+	) : (
 		<div className={cn(className)} {...props}>
 			<h1 className="defaultHeading uppercase text-center text-2xl md:text-3xl lg:text-4xl tracking-wide mb-10">
 				Comments
 			</h1>
-			{!comments || comments.length === 0 ? (
-				<></>
-			) : (
-				<div>
-					{comments.map(({ id, message }) => (
-						<div key={id} className="flex items-center mb-12">
-							<Avatar className="w-[50px] h-[50px] mr-5" />
-							<div className="flex-1 py-6 px-8 bg-slate-100">
-								<h3 className="defaultHeading not-italic font-normal text-xl mb-2">User</h3>
-								<p className="text-md leading-7">{message}</p>
-							</div>
+			<div>
+				{comments.map(({ id, message, userName }) => (
+					<div key={id} className="flex items-center mb-12">
+						<Avatar className="w-[50px] h-[50px] mr-5" />
+						<div className="flex-1 py-6 px-8 bg-slate-100">
+							<h3 className="defaultHeading not-italic font-normal text-xl mb-2">{userName}</h3>
+							<p className="text-md leading-7">{message}</p>
 						</div>
-					))}
-				</div>
-			)}
+					</div>
+				))}
+			</div>
 		</div>
 	)
 }

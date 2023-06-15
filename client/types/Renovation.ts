@@ -3,14 +3,14 @@ type IRenovation = {
 	name: string
 	description: string
 	price: number
-	imgsrc: string
 	characteristics: string[]
+	imgsrc: string[]
 }
 
 export type ICommentRes = {
 	id: number
-	userName: string
 	renovationId: number
+	userName: string
 	message: string
 }
 

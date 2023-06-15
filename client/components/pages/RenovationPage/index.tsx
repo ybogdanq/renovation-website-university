@@ -80,12 +80,12 @@ export const RenovationPage: FC<Props> = ({ className, ...props }) => {
 			<div className="container">
 				<div className="max-w-[75%] mx-auto">
 					<div className="relative">
-						{/* <div className="absolute -left-12 top-[50%] translate-y-[-50%]" onClick={handlePrev}>
+						<div className="absolute -left-12 top-[50%] translate-y-[-50%]" onClick={handlePrev}>
 							<ArrowLeft />
 						</div>
 						<div className="absolute -right-10 top-[50%] translate-y-[-50%]" onClick={handleNext}>
 							<ArrowRight />
-						</div> */}
+						</div>
 						<Swiper
 							ref={sliderRef}
 							className="relative cursor-grab mb-12 mx-auto w-full"
@@ -93,21 +93,23 @@ export const RenovationPage: FC<Props> = ({ className, ...props }) => {
 							slidesPerView={1}
 							onSwiper={swiper => console.log(swiper)}
 						>
-							<SwiperSlide className="p-3">
-								<InView triggerOnce>
-									<div className="relative w-full h-0 pt-[50%] mb-8">
-										<Image
-											src={renovationItem.imgsrc || ''}
-											quality={100}
-											className={cn(
-												'styledImage styledImage-inView absolute top-0 left-0 right-0 bottom-0 object-cover'
-											)}
-											fill
-											alt="product image"
-										/>
-									</div>
-								</InView>
-							</SwiperSlide>
+							{renovationItem.imgsrc.map(image => (
+								<SwiperSlide key={image} className="p-3">
+									<InView triggerOnce>
+										<div className="relative w-full h-0 pt-[50%] mb-8">
+											<Image
+												src={image}
+												quality={100}
+												className={cn(
+													'styledImage styledImage-inView absolute top-0 left-0 right-0 bottom-0 object-cover'
+												)}
+												fill
+												alt="product image"
+											/>
+										</div>
+									</InView>
+								</SwiperSlide>
+							))}
 						</Swiper>
 					</div>
 					<div>

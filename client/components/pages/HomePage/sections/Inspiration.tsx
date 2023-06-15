@@ -32,7 +32,6 @@ export const Inspiration: FC<Props> = ({ renovations, className, ...props }) => 
 					slidesPerView={windowWidth > 768 ? 2 : 1}
 					onSlideChange={() => console.log('slide change')}
 					onSwiper={swiper => console.log(swiper)}
-					centeredSlides
 				>
 					{renovations.map(renovation => (
 						<SwiperSlide key={renovation.id} className="px-10">

@@ -27,7 +27,7 @@ export const Header: FC<Props> = ({ className, ...props }) => {
 	const filteredRenovations =
 		(allRenovations &&
 			allRenovations.filter(renovation => {
-				return renovation.name.toLocaleLowerCase().includes(searchValue) && searchValue
+				return renovation.name.toLocaleLowerCase().includes(searchValue.toLowerCase()) && searchValue
 			})) ||
 		[]
 

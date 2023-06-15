@@ -5,7 +5,7 @@ import { InView } from 'react-intersection-observer'
 import Link from 'next/link'
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-	image: string
+	image: string[]
 	productTitle: string
 	link: string
 }
@@ -18,7 +18,7 @@ export const ProductImage: FC<Props> = ({ link, image, productTitle, className, 
 					{({ inView, ref }) => (
 						<div ref={ref} className="relative w-full h-0 pt-[60%] mb-8">
 							<Image
-								src={image}
+								src={image[0] || ""}
 								className={cn('styledImage absolute top-0 left-0 right-0 bottom-0 object-cover', {
 									'styledImage-inView': inView
 								})}
