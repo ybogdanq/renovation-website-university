@@ -13,7 +13,7 @@ export const Contact: FC<Props> = ({ className, ...props }) => {
 	const [email, setEmail] = useState<string>('')
 	const [additionalInfo, setAdditionalInfo] = useState<string>('')
 	return (
-		<div id='contact' className={cn(className, 'py-24')} {...props}>
+		<div id="contact" className={cn(className, 'py-24')} {...props}>
 			<div className="container">
 				<h1 className="defaultHeading uppercase text-2xl md:text-3xl lg:text-4xl text-center mb-2 sm:mb-3 md:mb-5 tracking-wide">
 					Contact us
@@ -66,7 +66,7 @@ export const Contact: FC<Props> = ({ className, ...props }) => {
 					/>
 					<div className="w-full flex items-center justify-center">
 						<Button
-							onClick={() =>
+							onClick={() => {
 								EmailService.sendContactRequest({
 									email: email,
 									firstName: firstName,
@@ -74,7 +74,8 @@ export const Contact: FC<Props> = ({ className, ...props }) => {
 									phone: phone,
 									additionalInfo: additionalInfo
 								})
-							}
+								alert('Sent')
+							}}
 						>
 							Send
 						</Button>

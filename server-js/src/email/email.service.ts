@@ -27,8 +27,13 @@ export class EmailService {
     await this.transporter.sendMail({
       from: 'Renovation app',
       to: data.email,
-      subject: 'Test',
-      html: 'Test',
+      subject: 'Renovation request',
+      html: `
+        <div>
+          <h3>Congrats! You have requested renovation withing our service</h3>
+          <h3>Additional info you have provided for our managers:</h3>
+          <div>${data.additionalInfo}</div>
+        </div>`,
     });
   }
 }
