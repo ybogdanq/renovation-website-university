@@ -6,12 +6,12 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model renovation {
-  id              Int       @id @default(autoincrement())
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
   name            String
   description     String
   price           Int
@@ -22,16 +22,16 @@ model renovation {
 }
 
 model comment {
-  id           Int        @id @default(autoincrement())
-  renovationId Int
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  renovationId String     @db.ObjectId
   userName     String
   message      String
   renovation   renovation @relation(fields: [renovationId], references: [id])
 }
 
 model rating {
-  id           Int        @id @default(autoincrement())
-  renovationId Int
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  renovationId String     @db.ObjectId
   rating       Int
   renovation   renovation @relation(fields: [renovationId], references: [id])
 }

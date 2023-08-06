@@ -31,7 +31,7 @@ export class RenovationService {
 
     const renovationItem = await this.prismaService.renovation.findFirst({
       where: {
-        id: Number(renovationId),
+        id: renovationId,
       },
     });
     if (!renovationItem) {
@@ -75,7 +75,7 @@ export class RenovationService {
     const comment = await this.prismaService.comment.create({
       data: {
         userName: commentData.userName,
-        renovationId: Number(renovationId),
+        renovationId: renovationId,
         message: commentData.message,
       },
     });
@@ -94,7 +94,7 @@ export class RenovationService {
   ): Promise<rating> {
     const newRating = await this.prismaService.rating.create({
       data: {
-        renovationId: Number(renovationId),
+        renovationId: renovationId,
         rating: ratingCount,
       },
     });
