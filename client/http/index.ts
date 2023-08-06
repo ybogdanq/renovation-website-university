@@ -1,10 +1,14 @@
 import axios from 'axios'
 
-const { API_URL } = process.env
+console.log(process.env.NODE_ENV)
+const apiUrl =
+	process.env.NODE_ENV === 'development'
+		? 'http://localhost:5212'
+		: 'https://renovation-app-backend-wvx92.ondigitalocean.app/'
 
 const $api = axios.create({
 	withCredentials: true,
-	baseURL: API_URL,
+	baseURL: apiUrl,
 	headers: {
 		'Access-Control-Allow-Origin': '*'
 	}
