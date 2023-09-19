@@ -13,18 +13,18 @@ export const Contact: FC<Props> = ({ className, ...props }) => {
 	const [email, setEmail] = useState<string>('')
 	const [additionalInfo, setAdditionalInfo] = useState<string>('')
 	return (
-		<div id="contact" className={cn(className, 'py-24')} {...props}>
+		<div id="contact" className={cn(className, 'py-8 sm:py-12 md:py-16 lg:py-24')} {...props}>
 			<div className="container">
-				<h1 className="defaultHeading uppercase text-2xl md:text-3xl lg:text-4xl text-center mb-2 sm:mb-3 md:mb-5 tracking-wide">
+				<h1 className="defaultHeading text-center text-2xl md:text-3xl lg:text-4xl tracking-wide mb-3 md:mb-5">
 					Contact us
 				</h1>
-				<p className="defaultText mx-auto text-center max-w-xl">
+				<p className="defaultText mx-auto text-center max-w-xl text-sm sm:text-l lg:text-xl tracking-wide">
 					Many desktop publishing packages and web page editors now use Lorem Ipsum as their default
 					model text
 				</p>
-				<div className="max-w-4xl mx-auto py-10 flex flex-wrap justify-between gap-y-6 gap-x-12">
+				<div className="max-w-4xl mx-auto py-7 md:py-10 flex flex-wrap justify-between gap-y-4 md:gap-y-6 gap-x-12">
 					<Input
-						className="max-w-[calc(50%-1.5rem)] w-full"
+						className="max-w-full md:max-w-[calc(50%-1.5rem)] w-full"
 						label="First name"
 						onChange={e => {
 							setFirstName(e.target.value)
@@ -32,7 +32,7 @@ export const Contact: FC<Props> = ({ className, ...props }) => {
 						value={firstName}
 					/>
 					<Input
-						className="max-w-[calc(50%-1.5rem)] w-full"
+						className="max-w-full md:max-w-[calc(50%-1.5rem)] w-full"
 						label="Last name"
 						onChange={e => {
 							setLastName(e.target.value)
@@ -40,7 +40,7 @@ export const Contact: FC<Props> = ({ className, ...props }) => {
 						value={lastName}
 					/>
 					<Input
-						className="max-w-[calc(50%-1.5rem)] w-full"
+						className="max-w-full md:max-w-[calc(50%-1.5rem)] w-full"
 						label="Phone"
 						onChange={e => {
 							setPhone(e.target.value)
@@ -48,7 +48,7 @@ export const Contact: FC<Props> = ({ className, ...props }) => {
 						value={phone}
 					/>
 					<Input
-						className="max-w-[calc(50%-1.5rem)] w-full"
+						className="max-w-full md:max-w-[calc(50%-1.5rem)] w-full"
 						label="Email"
 						onChange={e => {
 							setEmail(e.target.value)

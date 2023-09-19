@@ -21,9 +21,9 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDi
 export const Inspiration: FC<Props> = ({ renovations, className, ...props }) => {
 	const windowWidth = useWindowWidth()
 	return (
-		<div id="inspiration" className={cn(className)} {...props}>
-			<div className="container py-24">
-				<h1 className="defaultHeading text-center text-2xl md:text-3xl lg:text-4xl tracking-wide mb-10">
+		<div id="inspiration" className={cn(className, 'py-8 sm:py-12 md:py-16 lg:py-24')} {...props}>
+			<div className="container">
+				<h1 className="defaultHeading text-center text-2xl md:text-3xl lg:text-4xl tracking-wide mb-5 md:mb-10">
 					Inspiration
 				</h1>
 				<Swiper
@@ -34,7 +34,7 @@ export const Inspiration: FC<Props> = ({ renovations, className, ...props }) => 
 					onSwiper={swiper => console.log(swiper)}
 				>
 					{renovations.map(renovation => (
-						<SwiperSlide key={renovation.id} className="px-10">
+						<SwiperSlide key={renovation.id} className="px-2 md:px-5 lg:px-10">
 							<ProductImage
 								link={ClientRoutesEnum.RenovationItem + renovation.id}
 								image={renovation.imgsrc}

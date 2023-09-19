@@ -39,7 +39,7 @@ export const About: FC<Props> = ({ className, ...props }) => {
 								<h1
 									ref={ref}
 									className={cn(
-										'defaultHeading delay-500 duration-300 transition-all text-2xl md:text-3xl lg:text-4xl text-center mb-2 sm:mb-3 md:mb-5 tracking-wide',
+										'defaultHeading delay-500 duration-300 transition-all text-2xl md:text-3xl lg:text-4xl text-center mb-3 sm:mb-3 md:mb-5 tracking-wide',
 										styles
 									)}
 								>

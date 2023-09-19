@@ -16,7 +16,7 @@ export const ProductImage: FC<Props> = ({ link, image, productTitle, className, 
 			<Link href={link}>
 				<InView triggerOnce>
 					{({ inView, ref }) => (
-						<div ref={ref} className="relative w-full h-0 pt-[60%] mb-8">
+						<div ref={ref} className="relative w-full h-0 pt-[60%] mb-5 md:mb-8">
 							<Image
 								src={image[0] || ""}
 								className={cn('styledImage absolute top-0 left-0 right-0 bottom-0 object-cover', {
