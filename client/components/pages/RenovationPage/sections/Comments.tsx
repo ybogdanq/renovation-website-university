@@ -12,7 +12,7 @@ export const Comments: FC<Props> = ({ comments, className, ...props }) => {
 	return !comments || comments?.length === 0 ? (
 		<></>
 	) : (
-		<div className={cn(className)} {...props}>
+		<div className={cn(className, 'py-8 sm:py-12 md:py-16 lg:py-24')} {...props}>
 			<h1 className="defaultHeading uppercase text-center text-2xl md:text-3xl lg:text-4xl tracking-wide mb-10">
 				Comments
 			</h1>

@@ -21,19 +21,19 @@ export const OtherWorks: FC<Props> = ({ currentRenovation, renovations, classNam
 	)
 	return (
 		<div className={cn(className)} {...props}>
-			<div className="container py-24">
-				<h1 className="defaultHeading text-center text-2xl md:text-3xl lg:text-4xl tracking-wide mb-10">
-					Our works
+			<div className="container py-8 sm:py-12 md:py-16 lg:py-24">
+				<h1 className="defaultHeading text-center text-2xl md:text-3xl lg:text-4xl tracking-wide mb-3 md:mb-10">
+					Other works
 				</h1>
 				<Swiper
-					className="max-w-5xl cursor-grab"
+					className="max-w-full md:max-w-5xl cursor-grab"
 					spaceBetween={0}
 					slidesPerView={windowWidth > 768 ? 2 : 1}
 					onSlideChange={() => console.log('slide change')}
 					onSwiper={swiper => console.log(swiper)}
 				>
 					{filteredRenovations.map(renovation => (
-						<SwiperSlide key={renovation.id} className="px-10">
+						<SwiperSlide key={renovation.id} className="px-2 md:px-5 lg:px-10">
 							<ProductImage
 								link={ClientRoutesEnum.RenovationItem + renovation.id}
 								image={renovation.imgsrc}

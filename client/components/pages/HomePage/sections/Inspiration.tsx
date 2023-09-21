@@ -27,7 +27,7 @@ export const Inspiration: FC<Props> = ({ renovations, className, ...props }) => 
 					Inspiration
 				</h1>
 				<Swiper
-					className="max-w-5xl cursor-grab"
+					className="max-w-full md:max-w-5xl cursor-grab"
 					spaceBetween={0}
 					slidesPerView={windowWidth > 768 ? 2 : 1}
 					onSlideChange={() => console.log('slide change')}

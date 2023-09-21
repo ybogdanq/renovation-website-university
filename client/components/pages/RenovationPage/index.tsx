@@ -18,6 +18,7 @@ import { useParams } from 'next/navigation'
 import { createNotification } from '@/utils/createNotification'
 import { NotificationContainer } from 'react-notifications'
 import { QueryKeys } from '@/types/QueryKeys'
+import useWindowWidth from '@/utils/hooks/useWindowWidth'
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
@@ -25,6 +26,7 @@ export const RenovationPage: FC<Props> = ({ className, ...props }) => {
 	const params = useParams()
 	const renovationId = params.renovationId as unknown as number
 	const queryClient = useQueryClient()
+	const windowWidth = useWindowWidth()
 
 	const {
 		data: renovationItem,
@@ -76,19 +78,29 @@ export const RenovationPage: FC<Props> = ({ className, ...props }) => {
 	}
 
 	return (
-		<div className={cn(className, 'pt-40')} {...props}>
+		<div className={cn(className, 'pt-28 md:pt-40')} {...props}>
 			<div className="container">
-				<div className="max-w-[75%] mx-auto">
+				<div className="max-w-full md:max-w-[75%] mx-auto">
 					<div className="relative">
-						<div className="absolute -left-12 top-[50%] translate-y-[-50%]" onClick={handlePrev}>
-							<ArrowLeft />
-						</div>
-						<div className="absolute -right-10 top-[50%] translate-y-[-50%]" onClick={handleNext}>
-							<ArrowRight />
-						</div>
+						{windowWidth > 768 && (
+							<>
+								<div
+									className="absolute -left-12 top-[50%] translate-y-[-50%]"
+									onClick={handlePrev}
+								>
+									<ArrowLeft />
+								</div>
+								<div
+									className="absolute -right-10 top-[50%] translate-y-[-50%]"
+									onClick={handleNext}
+								>
+									<ArrowRight />
+								</div>
+							</>
+						)}
 						<Swiper
 							ref={sliderRef}
-							className="relative cursor-grab mb-12 mx-auto w-full"
+							className="relative cursor-grab mb-0 md:mb-12 mx-auto w-full"
 							spaceBetween={0}
 							slidesPerView={1}
 							onSwiper={swiper => console.log(swiper)}
@@ -112,9 +124,9 @@ export const RenovationPage: FC<Props> = ({ className, ...props }) => {
 							))}
 						</Swiper>
 					</div>
-					<div>
-						<div className="flex items-center justify-between mb-7">
-							<h1 className="defaultHeading uppercase not-italic tracking-wider font-bold text-3xl">
+					<div className="pb-8 sm:pb-12 md:pb-16 lg:pb-24">
+						<div className="block md:flex items-center justify-between mb-5 md:mb-7">
+							<h1 className="defaultHeading uppercase not-italic tracking-wider font-bold text-2xl md:text-3xl mb-2 md:mb-0">
 								{renovationItem.name}
 							</h1>
 							<StarRatings
@@ -124,14 +136,16 @@ export const RenovationPage: FC<Props> = ({ className, ...props }) => {
 								changeRating={newRating => {
 									mutateRating(newRating)
 								}}
-								starDimension="30px"
+								starDimension={windowWidth > 768 ? '30px' : '23px'}
 								starSpacing="2px"
 								numberOfStars={5}
 								name="rating"
 							/>
 						</div>
-						<p className="defaultText max-w-4xl mb-7">{renovationItem.description}</p>
-						<span className="inline-block font-bold tracking-wider text-xl mb-7">
+						<p className="defaultText max-w-full md:max-w-4xl mb-5 md:mb-7">
+							{renovationItem.description}
+						</p>
+						<span className="inline-block font-bold tracking-wider text-md md:text-xl mb-4 md:mb-7">
 							{renovationItem.price}$
 						</span>
 						<ul className="pl-5 list-disc">
