@@ -42,7 +42,7 @@ export const Feedback: FC<Props> = ({ className, ...props }) => {
 
 	return (
 		<div className={cn(className, 'py-8 sm:py-12 md:py-16 lg:py-20')} {...props}>
-			<h1 className="defaultHeading uppercase text-center text-2xl md:text-3xl lg:text-4xl tracking-wide mb-10">
+			<h1 className="defaultHeading text-center text-2xl md:text-3xl lg:text-4xl tracking-wide mb-3 md:mb-10">
 				Leave your feedback
 			</h1>
 			<Input
@@ -58,7 +58,7 @@ export const Feedback: FC<Props> = ({ className, ...props }) => {
 				value={message}
 				onChange={e => setMessage(e.target.value)}
 			/>
-			<Button className='block mx-auto md:m-0' type="button" onClick={addNewComment}>
+			<Button className="block mx-auto md:m-0" type="button" onClick={addNewComment}>
 				Send
 			</Button>
 		</div>

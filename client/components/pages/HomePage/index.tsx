@@ -22,7 +22,7 @@ export const Homepage: FC<Props> = ({ className, ...props }) => {
 		<div className={cn(className)} {...props}>
 			<Hero />
 			<About />
-			{/* <OurWork renovations={data || []} /> */}
+			<OurWork renovations={data || []} />
 			<Inspiration renovations={data || []} />
 			<Contact />
 			<NotificationContainer />

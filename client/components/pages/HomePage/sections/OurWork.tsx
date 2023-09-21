@@ -23,7 +23,7 @@ export const OurWork: FC<Props> = ({ renovations, className, ...props }) => {
 				<h1 className="defaultHeading text-white uppercase tracking-wide text-2xl md:text-3xl lg:text-4xl mb-7 md:mb-10">
 					Our work
 				</h1>
-				<div className="flex justify-center items-centerf flex-wrap flex-grow-0 flex-shrink-0 whitespace-nowrap md:whitespace-normal gap-x-2 md:gap-x-4 gap-y-3 md:gap-y-6 max-w-xl [&>*]:basis-[130px] [&>*]:px-2 [&>*]:md:px-8 [&>*]:md:basis-auto ">
+				<div className="flex justify-center items-center flex-wrap [&>*]:flex-grow-0 [&>*]:flex-shrink-1 [&>*]:md:flex-shrink-0 whitespace-nowrap md:whitespace-normal gap-x-2 md:gap-x-4 gap-y-3 md:gap-y-6 max-w-xl [&>*]:basis-[50%] [&>*]:px-0 [&>*]:md:px-8 [&>*]:md:basis-auto ">
 					{renovations.map(renovation => (
 						<Link key={renovation.id} href={ClientRoutesEnum.RenovationItem + renovation.id}>
 							<button className="defaultBtn">{renovation.name}</button>
